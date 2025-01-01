@@ -1,0 +1,6 @@
+@NguyenTrieuPhu_Sunflower_HostAddress = http://localhost:5031
+
+GET {{NguyenTrieuPhu_Sunflower_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
