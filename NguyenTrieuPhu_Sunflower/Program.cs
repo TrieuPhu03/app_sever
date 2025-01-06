@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using NguyenTrieuPhu_Sunflower.Models;
+using NguyenTrieuPhu_Sunflower.Repositories;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -16,7 +17,12 @@ builder.Services.AddIdentity<User, IdentityRole>()
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+     .AddJsonOptions(options =>
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles); ;
+builder.Services.AddScoped<IPostRepository, PostRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

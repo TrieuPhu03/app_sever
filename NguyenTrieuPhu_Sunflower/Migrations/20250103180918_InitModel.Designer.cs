@@ -12,7 +12,7 @@ using NguyenTrieuPhu_Sunflower.Models;
 namespace NguyenTrieuPhu_Sunflower.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241231141635_InitModel")]
+    [Migration("20250103180918_InitModel")]
     partial class InitModel
     {
         /// <inheritdoc />
@@ -184,7 +184,7 @@ namespace NguyenTrieuPhu_Sunflower.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Marker", "identity");
+                    b.ToTable("Markers", "identity");
                 });
 
             modelBuilder.Entity("NguyenTrieuPhu_Sunflower.Models.Post", b =>
@@ -195,17 +195,18 @@ namespace NguyenTrieuPhu_Sunflower.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Like")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Like")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -226,6 +227,9 @@ namespace NguyenTrieuPhu_Sunflower.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("BirthDay")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -236,6 +240,9 @@ namespace NguyenTrieuPhu_Sunflower.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Initials")
                         .HasMaxLength(5)
@@ -273,12 +280,6 @@ namespace NguyenTrieuPhu_Sunflower.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
-
-                    b.Property<DateTime?>("birthDay")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("image")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

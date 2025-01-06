@@ -36,8 +36,8 @@ namespace NguyenTrieuPhu_Sunflower.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Initials = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: true),
-                    birthDay = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BirthDay = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -176,7 +176,7 @@ namespace NguyenTrieuPhu_Sunflower.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Marker",
+                name: "Markers",
                 schema: "identity",
                 columns: table => new
                 {
@@ -189,9 +189,9 @@ namespace NguyenTrieuPhu_Sunflower.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Marker", x => x.Id);
+                    table.PrimaryKey("PK_Markers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Marker_AspNetUsers_UserId",
+                        name: "FK_Markers_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalSchema: "identity",
                         principalTable: "AspNetUsers",
@@ -207,9 +207,9 @@ namespace NguyenTrieuPhu_Sunflower.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Like = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Like = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -271,9 +271,9 @@ namespace NguyenTrieuPhu_Sunflower.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Marker_UserId",
+                name: "IX_Markers_UserId",
                 schema: "identity",
-                table: "Marker",
+                table: "Markers",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -307,7 +307,7 @@ namespace NguyenTrieuPhu_Sunflower.Migrations
                 schema: "identity");
 
             migrationBuilder.DropTable(
-                name: "Marker",
+                name: "Markers",
                 schema: "identity");
 
             migrationBuilder.DropTable(

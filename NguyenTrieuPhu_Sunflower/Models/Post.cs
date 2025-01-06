@@ -1,13 +1,23 @@
-﻿namespace NguyenTrieuPhu_Sunflower.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace NguyenTrieuPhu_Sunflower.Models
 {
     public class Post
     {
         public int Id { get; set; }
+
         public string? Image { get; set; }
-        public string? Description { get; set; }
-        public string? Like { get; set; }
-        public string? Comment { get; set; }
+
+        [Required]
+        public string Description { get; set; }
+
+        public int Like { get; set; } = 0;
+
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        [Required]
         public string UserId { get; set; }
-        public User User { get; set; }
+
+        public virtual User? User { get; set; }
     }
 }

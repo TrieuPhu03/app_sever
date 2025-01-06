@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -104,6 +105,32 @@ namespace NguyenTrieuPhu_Sunflower.Controllers
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+        [Authorize]
+        [HttpPost("change-password")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordModel model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            // Lấy thông tin người dùng hiện tại từ Claims
+            var userName = User.Identity?.Name;
+            if (string.IsNullOrEmpty(userName))
+                return Unauthorized(new { Status = false, Message = "User not authenticated" });
+
+            var user = await _userManager.FindByNameAsync(userName);
+            if (user == null)
+                return NotFound(new { Status = false, Message = "User not found" });
+
+            // Thay đổi mật khẩu
+            var result = await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+            if (!result.Succeeded)
+            {
+                var errors = result.Errors.Select(e => e.Description).ToList();
+                return BadRequest(new { Status = false, Errors = errors });
+            }
+
+            return Ok(new { Status = true, Message = "Password changed successfully" });
         }
     }
 }
