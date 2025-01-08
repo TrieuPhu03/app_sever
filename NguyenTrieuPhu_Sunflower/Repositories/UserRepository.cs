@@ -62,5 +62,11 @@ namespace NguyenTrieuPhu_Sunflower.Repositories
             return await _context.Users
                 .FirstOrDefaultAsync(user => user.UserName == userName);
         }
+
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(user => user.Email == email);
+
+        }
     }
 }

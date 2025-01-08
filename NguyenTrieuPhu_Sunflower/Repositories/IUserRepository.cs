@@ -12,5 +12,6 @@ namespace NguyenTrieuPhu_Sunflower.Repositories
         Task DeleteAsync(string id); // Sử dụng string vì id của User là string
         Task<bool> ExistsAsync(string id); // Kiểm tra sự tồn tại của User theo id
         Task<User> GetUserProfileAsync(string userName);
+        Task<User> GetUserByEmailAsync(string email);
     }
 }

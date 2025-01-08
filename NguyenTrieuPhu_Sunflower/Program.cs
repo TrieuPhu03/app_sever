@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using NguyenTrieuPhu_Sunflower.Models;
 using NguyenTrieuPhu_Sunflower.Repositories;
+using NguyenTrieuPhu_Sunflower.Service;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -13,7 +14,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
-
+builder.Services.AddControllersWithViews();
+builder.Services.Configure<DataProtectionTokenProviderOptions>(opt => opt.TokenLifespan = TimeSpan.FromHours(10)); //moi them
 
 // Add services to the container.
 
@@ -22,6 +24,7 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles); ;
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -38,7 +41,8 @@ builder.Services.AddCors(options =>
         //Thay bằng địa chỉ localhost khi khởi chạy bên frontend (VSCode)
         policy.WithOrigins("http://127.0.0.1:5500", "http://localhost:5500")
         .AllowAnyHeader()
-        .AllowAnyMethod();
+        .AllowAnyMethod()
+        .AllowCredentials();
     });
 });
 
@@ -93,13 +97,18 @@ else
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseRouting();
 app.UseHttpsRedirection();
 // Áp dụng CORS cho các yêu cầu đến API
 app.UseCors("MyAllowOrigins");
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Account}/{action=ForgotPassword}/{id?}");
+});
 //app.MapIdentityApi<User>();
 
 app.MapControllers();
