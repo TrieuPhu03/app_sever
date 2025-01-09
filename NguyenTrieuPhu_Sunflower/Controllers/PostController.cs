@@ -98,7 +98,6 @@ namespace NguyenTrieuPhu_Sunflower.Controllers
 
             return NoContent();
         }
-
         // DELETE: api/Post/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePost(int id)

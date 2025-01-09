@@ -171,10 +171,13 @@ namespace NguyenTrieuPhu_Sunflower.Migrations
                     b.Property<string>("image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("latiTude")
+                    b.Property<string>("kinhDo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("longiTude")
+                    b.Property<string>("title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("viDo")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

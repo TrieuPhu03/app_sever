@@ -12,8 +12,8 @@ using NguyenTrieuPhu_Sunflower.Models;
 namespace NguyenTrieuPhu_Sunflower.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250103180918_InitModel")]
-    partial class InitModel
+    [Migration("20250108182227_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -174,10 +174,13 @@ namespace NguyenTrieuPhu_Sunflower.Migrations
                     b.Property<string>("image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("latiTude")
+                    b.Property<string>("kinhDo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("longiTude")
+                    b.Property<string>("title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("viDo")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

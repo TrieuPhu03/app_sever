@@ -15,10 +15,9 @@ namespace NguyenTrieuPhu_Sunflower.Models
         public string? Image { get; set; }
 
         [JsonIgnore]
-        public ICollection<Post> Posts { get; set; }
+        public ICollection<Post>? Posts { get; set; }
 
         [JsonIgnore]
-        public ICollection<Marker> Markers { get; set; }
-
+        public ICollection<Marker>? Markers { get; set; }
     }
 }

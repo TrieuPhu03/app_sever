@@ -22,6 +22,7 @@ builder.Services.Configure<DataProtectionTokenProviderOptions>(opt => opt.TokenL
 builder.Services.AddControllers()
      .AddJsonOptions(options =>
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles); ;
+builder.Services.AddScoped<IMarkerRepository, MarkerRepository>();
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IEmailService, EmailService>();

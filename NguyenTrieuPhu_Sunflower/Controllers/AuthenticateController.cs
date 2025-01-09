@@ -78,10 +78,11 @@ namespace NguyenTrieuPhu_Sunflower.Controllers
             var userRoles = await _userManager.GetRolesAsync(user);
 
             var authClaims = new List<Claim>
-    {
-        new Claim(ClaimTypes.Name, user.UserName),
-        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-    };
+            {
+            new Claim(ClaimTypes.Name, user.UserName), // Lưu username
+            new Claim(ClaimTypes.NameIdentifier, user.Id), // Lưu id của user
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()) // Lưu mã định danh token
+            };
 
             foreach (var userRole in userRoles)
             {
@@ -158,7 +159,7 @@ namespace NguyenTrieuPhu_Sunflower.Controllers
             var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
 
             // Tạo deep link thay vì URL web
-            var resetLink = $"https://biggreyboard71.conveyor.cloud/Account/ResetPassword?token={Uri.EscapeDataString(resetToken)}&email={Uri.EscapeDataString(user.Email)}";
+            var resetLink = $"https://oldgoldrock6.conveyor.cloud/Account/ResetPassword?token={Uri.EscapeDataString(resetToken)}&email={Uri.EscapeDataString(user.Email)}";
 
             try
             {

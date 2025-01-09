@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace NguyenTrieuPhu_Sunflower.Migrations
 {
     /// <inheritdoc />
-    public partial class InitModel : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -182,8 +182,9 @@ namespace NguyenTrieuPhu_Sunflower.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    longiTude = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    latiTude = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    kinhDo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    viDo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
