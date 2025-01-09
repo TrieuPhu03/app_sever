@@ -49,8 +49,6 @@ namespace NguyenTrieuPhu_Sunflower.Controllers
         [HttpGet]
         public async Task<IActionResult> ResetPassword([FromQuery] string token, [FromQuery] string email)
         {
-            Console.WriteLine($"Token: {token}");
-            Console.WriteLine($"Email: {email}");
             if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(email))
             {
                 return View("Error", "Invalid password reset token or email.");

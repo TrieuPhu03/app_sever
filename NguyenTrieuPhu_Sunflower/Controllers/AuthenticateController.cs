@@ -159,7 +159,7 @@ namespace NguyenTrieuPhu_Sunflower.Controllers
             var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
 
             // Tạo deep link thay vì URL web
-            var resetLink = $"https://oldgoldrock6.conveyor.cloud/Account/ResetPassword?token={Uri.EscapeDataString(resetToken)}&email={Uri.EscapeDataString(user.Email)}";
+            var resetLink = $"https://foundtanstone42.conveyor.cloud/Account/ResetPassword?token={Uri.EscapeDataString(resetToken)}&email={Uri.EscapeDataString(user.Email)}";
 
             try
             {
