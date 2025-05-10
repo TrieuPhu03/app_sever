@@ -6,12 +6,18 @@ namespace NguyenTrieuPhu_Sunflower.Models
 {
     public class User: IdentityUser
     {
+        [MaxLength(5)]
         public string? Initials { get; set; }
-        //User = IdentityUser + string Inititals
-        public DateTime? birthDay { get; set; }
-        public string? image { get; set; }
-        public ICollection<Post> Posts { get; set; }
-        public ICollection<Marker> Markers { get; set; }
 
+        [DataType(DataType.Date)]
+        public DateTime? BirthDay { get; set; }
+
+        public string? Image { get; set; }
+
+        [JsonIgnore]
+        public ICollection<Post>? Posts { get; set; }
+
+        [JsonIgnore]
+        public ICollection<Marker>? Markers { get; set; }
     }
 }
